@@ -1,1 +1,149 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{algpseudocode}
+\usepackage{mismath}
+\usepackage{algorithm}
+\usepackage[spanish]{babel}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
 
+
+
+\begin{document}
+
+\section{Punto (a)}
+\subsection{Pseudocodigo}
+
+\begin{algorithmic}[1]
+\Procedure{funcion1}{$n$}
+    \For{$i=2;$ $i \leq 5;$ $i = i * i$}
+        \State \textbf{print} $("Hola Mundo")$
+    \EndFor
+    \For{$i=1;$ $i \leq n;$ $i = i * 5$}
+        \State \textbf{print} $("Hola Mundo")$
+    \EndFor
+\EndProcedure
+\end{algorithmic} 
+
+\subsection{Analisis}
+\subsection*{Análisis del  primer  for:}
+El primer for se realiza 3 veces, \textit{i= 2, 4, 16}. El primer print se ejecuta la cantidad del for -1(se resta 1), es decir 2 veces.
+
+\subsection*{Análisis del  segundo for:}
+$n<5 \gets 1$
+\newline
+$n<25 \gets 2$
+\newline
+$n<125 \gets 3$
+\newline
+El segundo for se realiza  \textit{$\lceil log_5(n)\rceil + 1$} porque $i \leq n$,  cuando $5^i  = n$ entonces  $i=log_5(n)$, la función techo porque se hace una cantidad entera de operaciones y el +1 porque se suma la condición de parada.
+El segundo print se ejecuta la misma cantidad del for -1(se resta 1), es decir  $\lceil log_5(n)\rceil$ veces. \\
+
+$T(n) = 2 + \lceil log_5(n) \rceil  \to T(n) = \theta(1) + \theta(log(n))$ \\
+Por lo tanto la complejidad es \\
+\textbf{T(n) = $\theta$(log(n))}
+
+\section{Punto (b)}
+
+\subsection{Pseudocodigo}
+
+\begin{algorithmic}[1]
+\Procedure{funcion2}{$n$}
+    \For{$i=1;i \leq n;i=i*2$}
+        \For{$j=1; j\leq n; j = j+j$}
+            \State \textbf{print} $("Hola Mundo")$
+        \EndFor
+    \EndFor
+\EndProcedure
+\end{algorithmic}
+
+\subsection{Analisis}
+\subsection*{Análisis del  primer  for:}
+El primer for se realiza hasta n, los valores de i= 1, 2, 4, 8…
+n<2 -> 1
+n<4 -> 2
+n<8 -> 3
+El primer for se realiza  $\lceil log_2(n)\rceil + 1$ por la misma razón del ejercicio anterior, $i \leq n$, cuando $2^i = n$ entonces $i=log_2(n)$, la función techo porque se hace una cantidad entera de operaciones y el +1 porque se suma la condición de parada.
+
+\subsection*{Análisis del  segundo for:}
+El segundo for se realiza hasta n, los valores de $j= 1, 2, 4, 8…$ hasta  $j \leq n$, cuando $2^i = n$ entonces $i=log_2(n)$. El segundo for se realiza igual $\lceil log_2(n)\rceil +1$ veces.
+\newline
+El print se hace la misma cantidad que el for -1(se resta 1), por lo que se pinta $\lceil Log_2(n)\rceil$ veces.
+\newline
+Por lo tanto la complejidad es:
+\newline
+\textbf{T(n) = $\theta$(log(n))}
+
+\section{Punto (c)}
+
+\subsection{Pseudocodigo}
+\begin{algorithmic}
+\Procedure{funcion3}{$n$}
+    \If{$n == 1$}
+        \State \textbf{print} $("Hola Mundo")$
+    \Else
+        \State \textbf{print} $("Hola Mundo")$
+        \State \textbf{funcion3} ($n/2$)
+        \State \textbf{funcion3} ($n/2$)
+    \EndIf
+\EndProcedure
+\end{algorithmic}
+
+\subsection{Analisis}
+\subsection*{Análisis del If:}
+El if se realiza 1 vez por cada caso (caso base o caso iterativo) 
+El primer print se hace 1 vez cada que se cumple el caso base
+\textbf{Sino} 
+el segundo print se hace 1 vez cada que se cumple el caso iterativo.
+\newline
+Se itera la \textit{funcion3} 2 veces y por cada iteración se hace 1 comparación y se pinta 1 Hola Mundo, por esto la recurrencia queda:
+\newline
+\textbf{2T(n/2) + $\theta$(1), T(1) = $\theta$(1)}
+\newline
+
+Para resolver la recurrencia se utiliza el \textbf{primer caso del método maestro}
+\newline
+$a=2, b=2, f(n)= \theta(1)$ \newline
+$f(n)= \bigo(n^{log_b a - \epsilon})$ \newline
+$\theta(1)= \bigo(n^{log_2 2 - \epsilon })$ \newline
+$\theta(1)= \bigo(n^{1 - \epsilon} )$ \newline
+$\theta(1)= \bigo(n^{1 - 0.1})$ \newline
+$\theta(1)= \bigo(n^{0.9})$ \newline
+Por lo tanto la complejidad es \newline
+\textbf{T(n)=$\theta$(n)}
+
+\section{Punto (d)}
+\subsection{Pseudocodigo}
+\begin{algorithmic}
+\Procedure{funcion4}{$n$}
+    \If{$n==1$}
+        \State \textbf{print} $("Hola Mundo")$
+    \Else
+        \State \textbf{print} $("Hola Mundo")$
+        \For{$j=1; j \leq 3; j=j+1$}
+            \State \textbf{funcion4}($n/3$)
+        \EndFor
+    \EndIf
+\EndProcedure
+\end{algorithmic}
+
+\subsection{Análisis}
+\subsection*{Análisi del If}
+El if se realiza 1 vez por cada caso (caso base o caso iterativo).  \newline
+El primer print se hace 1 vez cada que se cumple el caso base
+\textbf{Sino}
+el segundo print se hace 1 vez cada que se cumple el caso iterativo. \newline
+El for se realiza 4 veces, los valores de \textit{i= 1,2,3,4}.
+La recursión de funcion4 se llama el número de veces que el for -1 (se resta 1) y también pinta 1 Hola mundo y hace 4 veces el for por cada iteración; por esto la recurrencia queda: \newline
+\textbf{3T(n/3) + $\theta$(1), T(1) = $\theta$(1)} \newline
+
+Para resolver la recurrencia se utiliza \textbf{el primer caso del método maestro} \newline
+$a=3, b=3, f(n)=\theta(1)$ \newline
+$\theta(1) = \bigo(n^{log_3 3-\epsilon})$ \newline
+$\theta(1) = \bigo(n^{1-\epsilon})$ \newline
+$\theta(1) = \bigo(n^{1-0.1})$ \newline
+$\theta(1) = \bigo(n^{0.9})$ \newline
+Por lo tanto la complejidad es: \newline
+\textbf{T(n) = $\theta$(n)}
+
+\end{document}
