@@ -1,1 +1,58 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{algpseudocode}
+\usepackage{mismath}
+\usepackage{algorithm}
+\usepackage{amsmath}
+\usepackage{graphicx}
 
+\begin{document}
+
+\setcounter{section}{5}
+\section*{Punto 5}
+
+\subsection{Precisar de manera correcta la idea de su algoritmo.}
+
+Primero que todo es importante tener los dos arreglos (M[] y N[]) ordenados de manera ascendente, para que de este modo podamos comparar el precio del apartamento con menor valor con el dinero del aspirante de menor valor, esto con la intensión de que si el dinero del aspirante no está en el rango del apartamento de menor valor, tampoco estará en el de los demas apartamentos, por lo tanto no hay necesidad de seguir comparando con los demas apartamentos y podemos seguir con el siguiente aspirante.
+
+Si el dinero del aspirante sí está en el rango del apartamento, pasaremos al siguiente partamento y al siguiente aspirante y sumaremos 1 a un contador que significa la cantidad de apartamentos arrendados.
+
+\subsection{Realizar un pseudo-código del algoritmo.}
+
+
+ \begin{algorithmic}[1]
+    \Procedure{gestion\_Apto}{$m,n,k,M[],N[]$}
+       \State \textbf{sort} (M[])
+       \State \textbf{sort} (N[])
+       \State $apt\gets 0$
+       \State $apli\gets 0$
+       \State $contador\gets 0$
+       
+       \While{$apt < m$ and $apli < n$}
+            \If{$M[apt] >= (N[apli] - k)$ and $M[apt] <= (N[apli] + k)$}
+                \State $apt= apt + 1$
+                \State $apli= apli + 1$
+                \State $contador= contador + 1$
+            
+             \ElsIf{$M[apt] < (N[apli] - k)$}
+                 \State $apt= apt + 1$
+            
+             \Else
+                 \State $apli= apli + 1$
+                 
+            \EndIf
+            
+        \EndWhile\label{euclidendwhile}
+        \newline
+        \State \textbf{return} $contador$
+         \newline
+    \EndProcedure
+    \end{algorithmic}
+    
+\subsection{Estimar la complejidad del algoritmo en base al pseudo-código.}    
+ Las funciones auxiliares sort hacen referencias al algoritmo mergeSort visto en clase que es de complejidad O(nlogn). Al llamar esta función dos veces tenemos (n log n + m log m) y con la instrucción while tenemos que en el peor de los casos se ejecutaría n veces quedando (n log n + m log m + n), por lo tanto su complejidad es O(nlogn).
+
+
+
+
+\end{document}
