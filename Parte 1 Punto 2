@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{algpseudocode}
+\usepackage{mismath}
+\usepackage{algorithm}
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[spanish]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Taller 1 parte 1 punto 2}
+\author{edinson dorado }
+\date{January 2022}
+
+\begin{document}
+\maketitle
+
+
+\section{Punto 2}
+\setcounter{subsection}{2}
+\subsubsection{Pseudocodigo}
+
+\begin{algorithmic}[1]
+    \Procedure{FuncionMisterio}{$a,b$}
+        \If {$b == 0$}
+                \State \textbf{return} 1
+        \EndIf
+        \If {$b == 1$}
+                \State \textbf{return} a
+        \EndIf
+        \If {\textbf{even}(b)}
+                \State $c \gets \textbf{FuncionMisterio} (a, b/2)$
+                \State \textbf{return} c*c
+        \Else
+            \State $c \gets \textbf{FuncionMisterio} (a, b/2)$
+            \State \textbf{return} c*c*a
+        \EndIf
+    \EndProcedure
+    \end{algorithmic}
+\subsubsection{Explique qué hace el algoritmo (asuma que existe una función even que recibe un número y devuelve true si es par, false si es impar, y lo hace en O(1)). Asuma que a y b son 2 valores enteros positivos.}
+El algoritmo divide entre 2 el segundo argumento (b) hasta que llega a 1. Esto pasa al llamar la ecuación por primera vez con un segundo argumento (b) con un valor diferente de 0. Cuando llega a 1 entonces se retorna el primer argumento. Ese argumento luego es multiplicado por el mismo tantas veces como se ha partido el argumento b (gracias a la recursión).
+Si la primera invocación de  b es igual a 0, entonces el primer argumento (a) es             retornado. Esto emula la potencia del primer argumento a 0.
+En conclusión, el algoritmo eleva el primer argumento al segundo. \newline
+\subsubsection{¿Cuál es el mínimo de veces que se ejecuta la línea 7? ¿Cuál es el máximo? ¿De qué depende las veces que se ejecute en las siguientes llamadas al método?}
+¿Cuál es el mínimo de veces que se ejecuta la línea 7?\newline
+Esto depende del valor ingresado en el segundo argumento. Si b es un elemento que pertenece a la sucesión 2k -1, b siempre que b se divide en 2, siempre va a caer en el mismo caso y la línea 7 nunca se ejecutará. En conclusión: cero.\newline
+¿Cuál es el máximo?\newline
+Esto depende del valor ingresado en el segundo argumento. Si b es un elemento que pertenece a la sucesión (2k), siempre que b se divide en 2, siempre va a caer en el mismo caso y la línea 7 siempre se ejecutará. En conclusión: log(2k).\newline
+¿De qué depende las veces que se ejecute en las siguientes llamadas al método?\newline
+Depende en si el piso del segundo argumento dividido 2 es par, y cuantas veces esto pasa al volverse a llamar recursivamente ese resultado como segundo parámetro, y además de cuantas veces esto sucede (qué tan grande es el número).
+\subsubsection{ Diga la complejidad del algoritmo.}
+La función de recurrencia de este algoritmo puede aproximarse a la siguiente expresión:\newline
+T(n) = T(n/2) + 1\newline
+T(1) = 1\newline
+Cuyo orden de crecimiento puede expresarse como: O(logn).
+
+\end{document}
