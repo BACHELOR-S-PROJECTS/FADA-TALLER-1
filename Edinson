@@ -1,1 +1,49 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{algpseudocode}
+\usepackage{mismath}
+\usepackage{algorithm}
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[spanish]{babel}
 
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{MI PARTE}
+\author{EDINSON DORADO}
+
+\begin{document}
+\maketitle
+\setcounter{section}{6}
+\section*{Punto 6}
+
+\subsection{Precisar de manera correcta la idea de su algoritmo.}
+Debido a que la complejidad del algoritmo debe ser O(logn), puedo tratar de hacerlo con complejidad logarítmica o complejidad constante. Sé que ese comportamiento lo puedo modelar como una funcion cuadratica despues de hacer despejes y analisis del comportamiento de la gasolina N y la recarga R. Ahora bien, debido a que hay una formula cerrada para hallar solucion a una formula cuadratica, se que esto tomará O(1). Pero esto no es suficiente, además de usar la funcion que me da solucion a mi formula cuadratica debo usar funciones piso y techo para dar exactitud a los resultados. 
+
+\subsection{Realizar un pseudo-código del algoritmo.}
+    \begin{algorithmic}[1]
+    \Procedure{tanque\_gasolina}{$N,R$}
+        
+        \State $result\_exp \gets \textbf{solve\_cuadratic\_equation} (x*x + x - 2*(N-R))$
+        \If {\textbf{floor}(\textbf{max}(result\_exp)) $ == \textbf{max} (result\_exp)$}
+            \If {$N == R$}
+                \State \textbf{return} \textbf{floor}(\textbf{max}(result\_exp)) + R + 1
+           \EndIf
+           \State \textbf{return} \textbf{floor}(\textbf{max}(result\_exp)) + R
+        \EndIf
+        \State \textbf{return} \textbf{floor}(\textbf{max}(result\_exp)) + R + 1
+    \EndProcedure
+    \end{algorithmic}
+    
+
+
+\subsection{Estimar la complejidad del algoritmo en base al pseudo-código.}
+La complejidad del algoritmo será O(1). La funcion solve\_cudratic\_equation usa una formula cerrada, por lo que su complejidad es constante. Además de esto se usa funciones floor y max que tambien tienen complejidad constante. En las lineas 3 y 4 se usan estructuras if que también tienen complejidad constante. Si se suman todas estas complejidades, el resultado será O(1), que está en el conjunto de funciones de O(logn).
+\end{document}
