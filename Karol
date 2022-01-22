@@ -1,1 +1,73 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{algpseudocode}
+\usepackage{mismath}
+\usepackage{algorithm}
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[spanish]{babel}
 
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+
+\begin{document}
+\setcounter{section}{2}
+\section*{Punto 3.} 
+Dado el siguiente algoritmo:\newline
+    \begin{algorithmic}[1]
+    \Procedure{FuncionMisterio}{$n, arr[ ]$}
+        \For {$i \leftarrow 2,i \leftarrow i+1 ,n$}
+            \If {$arr[i] \not= true$}
+            \For {$j \leftarrow 2,j \leftarrow i + j,n$}
+                \State arr[j] = true
+            \EndFor
+            \EndIf
+        \EndFor
+    \EndProcedure
+    \end{algorithmic}
+
+\subsection*{Descripción del algoritmo:} 
+
+FuncionMisterio tiene dos entradas, la primera es un entero (tamaño del arreglo) y un arreglo de booleanos inicializados en false. La función del algoritmo es cambiar a true los booleanos que se encuentran en las posiciones de números no primos del arreglo, en otras palabras, no cambia el booleano (false) si la posición del arreglo es un número primo incluido la posición 1 (uno).
+
+\subsection*{Ejemplos:} 
+ 
+Si n=2, el arreglo es  [false, false], el arreglo será [false, false]
+\newline
+Si n=4, el arreglo es [false, false, false, false], el arreglo cambiará a  [false, false, false, true]
+\newline
+Si n=9, el arreglo es  [false, false, false, false, false, false, false, false, false, false, false, false], 
+\newline
+el arreglo cambiará a  [false, false, false, true, false, true, false, true, true].
+\subsection*{Complejidad:}
+\subsection*{Análisis del primer for:}
+
+Como empieza en i=2 y va hasta n se hace (n-1)+1 = n comparaciones; por lo tanto, la complejidad del for es: n, T(n)= (n)
+
+\subsection*{Análisis del if:}
+
+El if (línea 3) se ejecuta 1 vez por cada ocurrencia de i 
+
+\subsection*{Análisis del segundo for:}
+
+Como j=2i y va hasta n, es decir que “j” depende de “i” y va hasta el tamaño del arreglo, analizamos que sigue el siguiente patrón:
+(n-2i)/i\newline
+Como el peor caso es cuando i=2 ya que es el mayor número de veces que se va a ejecutar el segundo for, reemplazamos i en la fórmula anterior, quedando de la siguiente manera.\newline
+=(n-2(2))/2
+\newline
+=(n-4)/2
+\newline
+=(n/2)-(4/2)
+\newline
+=(n/2)-2\newline
+Suponiendo que el segundo for (línea 4) es la operación básica, podemos decir que la cota superior más ajustada sería:\newline
+T(n) = O(n). 
+
+\end{document}
