@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{algpseudocode}
+\usepackage{mismath}
+\usepackage{algorithm}
+\usepackage[spanish]{babel}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+
+
+\begin{document}
+\section{Punto 4: Creación de Equipos}
+\subsection{Idea del Algoritmo}
+Se decide ordenar ascendentemente la entrada basándose en tres criterios, el primero referente al nivel de cada jugador en el juego A, el segundo referente al nivel de cada jugador en el juego B y por último en base a la suma del nivel de cada jugador en los dos juegos. El arreglo será recorrido por ambos extremos del arreglo de objetos (índices: inicial $i$, final $n$), hasta que i sea igual a la mitad del mismo, esto si se cumple la propiedad de que la suma de los niveles de las parejas sea iguales.
+\newline
+Eso se comprueba guardando la suma del primer jugador con el último, si la suma de la siguiente pareja(el segundo jugador y el penúltimo) es igual al valor almacenado entonces se continúa con las siguientes parejas. Si la suma de una pareja no es igual al valor guardado esto da lugar a romper el bucle retornando False.
+
+\subsection{Pseudocodigo}
+\begin{algorithmic}[1]
+\Procedure{equivalentPairsLevels}{$arr$}
+    \State \textbf{SortFunction}(arr) \Comment{Ordena segun el primero de cada tupla}
+    \State \textbf{SortFunction}(arr) \Comment{Ordena segun el segundo de cada tupla}
+    \State \textbf{SortFunction}(arr) \Comment{Ordena segun la suma total de cada tupla} \\
+    \State $s \gets \textbf{lenght}(arr) - 1$
+    \State $new\_pair \gets None$ \\
+    \For{$i \gets 0$ to $\lfloor \textbf{lenght}(arr)/2 \rfloor$}
+        \If{$new\_pair == None$}
+            \State $new\_pair \gets (arr[i][0] + arr[n][0],\ arr[i][1] + arr[n][1])$
+            \State $n \gets n - 1$
+        \ElsIf{$new\_pair == (arr[i][0] + arr[n][0],\ arr[i][1] + arr[n][1])$}
+            \If{$n-1 == i$}
+                \State \textbf{return} True
+            \EndIf
+            \State $n \gets n - 1$
+        \Else
+            \State \textbf{return} False
+        \EndIf
+    \EndFor \\
+    \State \textbf{return} True \\
+\EndProcedure
+\end{algorithmic}
+
+\subsection{Complejidad del Algoritmo}
+En temas de complejidad cada función sort es $\bigo(n*log(n))$ ya que utilizan el algoritmo MergeSort con lo que tenemos $\bigo(n*log(n)) + \bigo(n*log(n)) + \bigo(n*log(n))$. \newline
+Analizando el bucle For es $\bigo(n)$ ya que en el peor de los casos se iterara n/2 veces. Con todo esto se llega a $\bigo(n*log(n)) + \bigo(n*log(n)) + \bigo(n*log(n)) + \bigo(n) = \bigo(n*log(n))$ que seria la complejidad del algoritmo.
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
